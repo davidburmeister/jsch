@@ -5,3 +5,5 @@ TERM is set regardless of what AcceptEnv is set in sshd_config, this is document
 
 To compile:
 ANT_HONE/bin/ant -emacs $@
+
+The android branch uses spongy castle (WIP) rather than the android cripped bouncy castle
