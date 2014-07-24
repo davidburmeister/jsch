@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -37,7 +37,7 @@ public class SHA1 implements HASH{
   MessageDigest md;
   public int getBlockSize(){return 20;}
   public void init() throws Exception{
-    try{ md=MessageDigest.getInstance("SHA-1"); }
+    try{ md=MessageDigest.getInstance("SHA-1", "SC"); }
     catch(Exception e){
       System.err.println(e);
     }

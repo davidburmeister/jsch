@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -39,8 +39,8 @@ public class SignatureDSA implements com.jcraft.jsch.SignatureDSA{
   KeyFactory keyFactory;
 
   public void init() throws Exception{
-    signature=java.security.Signature.getInstance("SHA1withDSA");
-    keyFactory=KeyFactory.getInstance("DSA");
+    signature=java.security.Signature.getInstance("SHA1withDSA", "SC");
+    keyFactory=KeyFactory.getInstance("DSA", "SC");
   }     
   public void setPubKey(byte[] y, byte[] p, byte[] q, byte[] g) throws Exception{
     DSAPublicKeySpec dsaPubKeySpec = 

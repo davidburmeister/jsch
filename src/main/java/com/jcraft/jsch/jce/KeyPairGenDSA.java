@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -40,7 +40,7 @@ public class KeyPairGenDSA implements com.jcraft.jsch.KeyPairGenDSA{
   byte[] g;
 
   public void init(int key_size) throws Exception{
-    KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA");
+    KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA", "SC");
     keyGen.initialize(key_size, new SecureRandom());
     KeyPair pair = keyGen.generateKeyPair();
     PublicKey pubKey=pair.getPublic();

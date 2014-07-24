@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -46,10 +46,10 @@ public class DH implements com.jcraft.jsch.DH{
   private KeyPairGenerator myKpairGen;
   private KeyAgreement myKeyAgree;
   public void init() throws Exception{
-    myKpairGen=KeyPairGenerator.getInstance("DH");
-//    myKpairGen=KeyPairGenerator.getInstance("DiffieHellman");
-    myKeyAgree=KeyAgreement.getInstance("DH");
-//    myKeyAgree=KeyAgreement.getInstance("DiffieHellman");
+    myKpairGen=KeyPairGenerator.getInstance("DH", "SC");
+//    myKpairGen=KeyPairGenerator.getInstance("DiffieHellman", "SC");
+    myKeyAgree=KeyAgreement.getInstance("DH", "SC");
+//    myKeyAgree=KeyAgreement.getInstance("DiffieHellman", "SC");
   }
   public byte[] getE() throws Exception{
     if(e==null){
@@ -66,7 +66,7 @@ public class DH implements com.jcraft.jsch.DH{
   }
   public byte[] getK() throws Exception{
     if(K==null){
-      KeyFactory myKeyFac=KeyFactory.getInstance("DH");
+      KeyFactory myKeyFac=KeyFactory.getInstance("DH", "SC");
       DHPublicKeySpec keySpec=new DHPublicKeySpec(f, p, g);
       PublicKey yourPubKey=myKeyFac.generatePublic(keySpec);
       myKeyAgree.doPhase(yourPubKey, true);

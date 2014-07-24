@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -39,8 +39,8 @@ public class SignatureRSA implements com.jcraft.jsch.SignatureRSA{
   KeyFactory keyFactory;
 
   public void init() throws Exception{
-    signature=java.security.Signature.getInstance("SHA1withRSA");
-    keyFactory=KeyFactory.getInstance("RSA");
+    signature=java.security.Signature.getInstance("SHA1withRSA", "SC");
+    keyFactory=KeyFactory.getInstance("RSA", "SC");
   }     
   public void setPubKey(byte[] e, byte[] n) throws Exception{
     RSAPublicKeySpec rsaPubKeySpec = 

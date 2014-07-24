@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -55,7 +55,7 @@ public class TripleDESCBC implements Cipher{
     }
 
     try{
-      cipher=javax.crypto.Cipher.getInstance("DESede/CBC/"+pad);
+      cipher=javax.crypto.Cipher.getInstance("DESede/CBC/"+pad, "SC");
 /*
       // The following code does not work on IBM's JDK 1.4.1
       SecretKeySpec skeySpec = new SecretKeySpec(key, "DESede");
@@ -65,14 +65,12 @@ public class TripleDESCBC implements Cipher{
 		  skeySpec, new IvParameterSpec(iv));
 */
       DESedeKeySpec keyspec=new DESedeKeySpec(key);
-      SecretKeyFactory keyfactory=SecretKeyFactory.getInstance("DESede");
+      SecretKeyFactory keyfactory=SecretKeyFactory.getInstance("DESede", "SC");
       SecretKey _key=keyfactory.generateSecret(keyspec);
-      synchronized(javax.crypto.Cipher.class){
-        cipher.init((mode==ENCRYPT_MODE?
-                     javax.crypto.Cipher.ENCRYPT_MODE:
-                     javax.crypto.Cipher.DECRYPT_MODE),
-                    _key, new IvParameterSpec(iv));
-      }
+      cipher.init((mode==ENCRYPT_MODE?
+		   javax.crypto.Cipher.ENCRYPT_MODE:
+		   javax.crypto.Cipher.DECRYPT_MODE),
+		  _key, new IvParameterSpec(iv));
     }
     catch(Exception e){
       cipher=null;

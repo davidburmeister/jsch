@@ -1,6 +1,6 @@
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /*
-Copyright (c) 2002-2014 ymnk, JCraft,Inc. All rights reserved.
+Copyright (c) 2002-2010 ymnk, JCraft,Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -49,7 +49,7 @@ public class Random implements com.jcraft.jsch.Random{
 
     /*
     try{ 
-      random=SecureRandom.getInstance("SHA1PRNG"); 
+      random=SecureRandom.getInstance("SHA1PRNG", "SC"); 
       return;
     }
     catch(java.security.NoSuchAlgorithmException e){ 
@@ -58,7 +58,7 @@ public class Random implements com.jcraft.jsch.Random{
 
     // The following code is for IBM's JCE
     try{ 
-      random=SecureRandom.getInstance("IBMSecureRandom"); 
+      random=SecureRandom.getInstance("IBMSecureRandom", "SC"); 
       return;
     }
     catch(java.security.NoSuchAlgorithmException ee){ 
