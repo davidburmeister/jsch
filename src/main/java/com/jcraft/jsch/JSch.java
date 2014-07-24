@@ -172,6 +172,8 @@ public class JSch{
     };
   static Logger logger=DEVNULL;
 
+  private static StringBuilder connectionInfo = new StringBuilder(250);
+
   public JSch(){
     /*
     // The JCE of Sun's Java5 on Mac OS X has the resource leak bug
@@ -573,5 +575,15 @@ public class JSch{
 
   static Logger getLogger(){
     return logger;
+  }
+
+  public static addConnectionInfo(String infoString)
+  {
+    connectionInfo.append(infoString + "\n");
+  }
+
+  public static String getConnectionInfo()
+  {
+    return connectionInfo.toString();
   }
 }

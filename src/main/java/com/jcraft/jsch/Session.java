@@ -245,6 +245,7 @@ public class Session implements Runnable{
         JSch.getLogger().log(Logger.INFO, 
                              "Connection established");
       }
+      JSch.addConnectionInfo("Connected to: " + host + ":" + port);
 
       jsch.addSession(this);
 
@@ -303,6 +304,8 @@ public class Session implements Runnable{
         JSch.getLogger().log(Logger.INFO, 
                              "Local version string: "+Util.byte2str(V_C));
       }
+      JSch.addConnectionInfo("Remote version string: "+Util.byte2str(V_S));
+      JSch.addConnectionInfo("Local version string: "+Util.byte2str(V_C));
 
       send_kexinit();
 
@@ -465,6 +468,7 @@ public class Session implements Runnable{
                  JSch.getLogger().isEnabled(Logger.INFO)){
                 JSch.getLogger().log(Logger.INFO, 
                                      "Authentication succeeded ("+method+").");
+                JSch.addConnectionInfo("Authentication method: " + method);
               }
 	    }
 	    catch(JSchAuthCancelException ee){
@@ -1137,6 +1141,8 @@ key_type+" key fingerprint is "+key_fprint+".\n"+
       method=guess[KeyExchange.PROPOSAL_ENC_ALGS_STOC];
       c=Class.forName(getConfig(method));
       s2ccipher=(Cipher)(c.newInstance());
+      JSch.addConnectionInfo("Server to client cipher: " + s2ccipher.getClass().getName());
+
       while(s2ccipher.getBlockSize()>Es2c.length){
         buf.reset();
         buf.putMPInt(K);
@@ -1164,6 +1170,7 @@ key_type+" key fingerprint is "+key_fprint+".\n"+
       method=guess[KeyExchange.PROPOSAL_ENC_ALGS_CTOS];
       c=Class.forName(getConfig(method));
       c2scipher=(Cipher)(c.newInstance());
+      JSch.addConnectionInfo("Client to server cipher: " + c2scipher.getClass().getName());
       while(c2scipher.getBlockSize()>Ec2s.length){
         buf.reset();
         buf.putMPInt(K);
